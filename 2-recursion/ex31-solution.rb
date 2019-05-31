@@ -1,5 +1,6 @@
+# model solution for Basic Recursion
+
 def sum(number)
-  # Your code here
   if number == 1
 		number
 	else

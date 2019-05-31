@@ -24,7 +24,7 @@ def tree_height_r(tree_as_list)
   end
 end
 
-puts tree_height_r([2, 7, 5, 2, 6, 0, 9])
+puts tree_height_K([2, 7, 5, 2, 6, 0, 9])
 
 
 # puts tree_height_K([2, 7, 5, 2, 6, 0, 9])

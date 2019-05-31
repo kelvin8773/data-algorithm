@@ -4,8 +4,8 @@ I build this repository to collect all my learning about **Data & Algorithm** al
 
 ## Note
 
-- Coding main done in **RUBY**, I might later update Other Languages if possible.
-
 - Welcome to re-use my code, make a PR if you think there are better way to tackle the problems, thanks!
+
+- Coding mainly done in **RUBY**, I might update other languages later.
 
 - Code are share as it is, use it on your own risk.
