@@ -34,5 +34,6 @@
 - [find the cycles](./ex55-find-the-cycles.rb)
 
 - [the greatest peaks](./ex56-the-greatest-peak.rb)
+  [readme](./ex56-the-greatest-peak.md)
 
 - [explorer maze escape](./ex57-explore-maze.rb)
