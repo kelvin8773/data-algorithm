@@ -1,4 +1,3 @@
-
 def find_peaks(map, row, col)
   me = map[row][col]
   top = row-1 >=0 ? map[row-1][col]:nil
@@ -20,11 +19,10 @@ def find_peaks(map, row, col)
       next_position = [row, col]
    end
 
-   if next_position[0] == row && next_position[1] == col
-      return map[row][col]
-   end
+   return map[row][col] if next_position == [row, col]
     
    find_peaks(map, next_position[0], next_position[1])
+
 end
 
 def greatest_peaks(map)
@@ -36,7 +34,7 @@ def greatest_peaks(map)
    for i in 0..row
     for j in 0..col
       peak = find_peaks(map, i, j)
-      if !peaks_areas[peak]
+      if !peaks_areas[peak]                 
         peaks_areas[peak] = []
       end
       peaks_areas[peak] << map[i][j]
@@ -48,9 +46,7 @@ def greatest_peaks(map)
   end
   
   return [areas.min, areas.max]
-
 end
-
 
 p greatest_peaks(
   [
