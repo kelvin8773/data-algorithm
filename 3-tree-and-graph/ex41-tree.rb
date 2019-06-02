@@ -2,13 +2,11 @@ def leftmost_nodes_sum(array)
   @sum = 0
   
   def helper(array, index)
-    
     if array[2*index+1] == nil
       return array[index]
     else 
       @sum =+ helper(array, 2*index+1) + array[index]
-    end
-    
+    end   
     p "#{array}, #{index}, #{@sum}"
     return @sum
   end
