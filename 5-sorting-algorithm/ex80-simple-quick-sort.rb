@@ -10,7 +10,7 @@ def simple_quicksort(array)
   return array if array.size <= 1
   sort_array = partition(array)
   res = simple_quicksort(sort_array[0]) + [sort_array[1]] + simple_quicksort(sort_array[2])
-  print "#{res.to_s.gsub("[","").gsub("]", "").gsub(",", "")}\n"
+  print "#{res.to_s.gsub(/[\[\],]/, "")}\n"
   return res
 end
 
