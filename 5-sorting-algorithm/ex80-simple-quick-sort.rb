@@ -8,8 +8,8 @@ end
 
 def simple_quicksort(array)
   return array if array.size <= 1
-  sort_array = partition(array)
-  res = simple_quicksort(sort_array[0]) + [sort_array[1]] + simple_quicksort(sort_array[2])
+  left, pivot , right = partition(array)
+  res = simple_quicksort(left) + [pivot] + simple_quicksort(right)
   print "#{res.to_s.gsub(/[\[\],]/, "")}\n"
   return res
 end
