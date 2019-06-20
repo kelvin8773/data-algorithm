@@ -1,11 +1,9 @@
 def partition(array)
   pivot,left, right =array[0], [], []
-  array.each do |x| 
-     x > pivot ? right << x : x == pivot ? 'do nothing': left << x
+  array[1..-1].each do |x| 
+     x > pivot ? right << x : left << x
   end  
   left + [pivot] + right
-
-  # array.reduce([]) {|result, x| x > array[0]? result << x : result.unshift(x)}
 end
 
 # p partition([4, 5, 3, 9, 1])

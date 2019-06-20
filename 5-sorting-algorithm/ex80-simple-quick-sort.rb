@@ -1,7 +1,7 @@
 def partition(array)
   pivot,left, right =array[0], [], []
-  array.each do |x| 
-     x > pivot ? right << x : x == pivot ? 'do nothing': left << x
+  array[1..-1].each do |x| 
+     x > pivot ? right << x : left << x
   end
    [left, pivot , right]
 end
@@ -10,7 +10,7 @@ def simple_quicksort(array)
   return array if array.size <= 1
   left, pivot , right = partition(array)
   res = simple_quicksort(left) + [pivot] + simple_quicksort(right)
-  print "#{res.to_s.gsub(/[\[\],]/, "")}\n"
+  puts res.join(" ")
   return res
 end
 
