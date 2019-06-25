@@ -14,5 +14,5 @@ def leftmost_nodes_sum(array)
   helper(array, 0)  
 end
 
-# puts leftmost_nodes_sum([2, 7, 5, 2, 6, 0, 9])
-puts leftmost_nodes_sum([2, 7, 5, 2, 6, 0, 9, 10, 12, 11, 18])
+puts leftmost_nodes_sum([2, 7, 5, 2, 6, 0, 9])
+# puts leftmost_nodes_sum([2, 7, 5, 2, 6, 0, 9, 10, 12, 11, 18])
