@@ -1,24 +1,20 @@
 def merge_sort(array1, array2)
-  return array1 if array1.size <= 1
-  return array2 if array2.size <= 1
-
-  array1 = merge_sort(array1[0..array1.size/2-1], array1[array1.size/2..-1])
-  array2 = merge_sort(array2[0..array2.size/2-1], array2[array2.size/2..-1])
-  
-  array2.reduce([]) do |res, y|
-    array1.each_with_index do |index, x|
-      y < x ? res << y : res << x
-    end
+  index = 0
+  until array2.size < 1 
+    # p "#{array1} - #{array1[index]} - #{index} - #{array2[0]}"
+    array2[0] < array1[index] ? array1.insert(index, array2.shift) 
+                  : index >= array1.size-1 ? (array1 = array1 + array2; break) : index += 1
   end
 
-  # p array1
-  # p array2
-
-  # array1 + array2
-
+  return array1
   
 end
 
-p merge_sort([1, 3, 9, 11], [2, 4, 6, 8])
+# p merge_sort([1, 3, 9, 11], [2, 4, 6, 8])
 # => [1, 2, 3, 4, 6, 8, 9, 11]
 
+p merge_sort([-3, 2, 2, 2, 4], [-2, 0, 1, 5, 7])
+
+p merge_sort([-4, -3, -1, 1, 3], [0, 5, 7, 9, 11])
+
+p merge_sort([-91, -4, 42, 121, 265, 530], [-623, -54, -7, 651, 721, 850])
