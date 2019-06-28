@@ -23,7 +23,6 @@ end
 # puts index_match([0, 2, 3, 7, 9, 11])
 # => 0
 
-
 array1 = [0, 2, 3, 7, 9, 11]
 
 array2 = [3, 5, 7, 9, 11, 13, 17]
@@ -44,14 +43,14 @@ allarr = [array1, array2, array3, array4, array5, array6, array7]
 def performent_test(arr)
 
   arr.each do |list|  
-
     Benchmark.ips do |x|
+      x.config(:time => 3, :warmup => 2)
+      # x.config(:stats => :bootstrap, :confidence => 95)
       p "Testing with #{list}"
       x.report("Using Linear method ") {index_match(list)}
       x.report("Using Binary search ") {index_match_log(list)}
-      x.compare!
+      x.compare!    
     end
-
   end
 
 end
