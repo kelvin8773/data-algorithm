@@ -10,11 +10,11 @@ def simple_quicksort(array)
   return array if array.size <= 1
   left, pivot , right = partition(array)
   res = simple_quicksort(left) + [pivot] + simple_quicksort(right)
-  puts res.join(" ")
+  # puts res.join(" ")
   return res
 end
 
-simple_quicksort([5, 8, 1, 3, 7, 10, 2])
+# p simple_quicksort([5, 8, 1, 3, 7, 10, 2])
 # => 2 3
 #    1 2 3
 #    7 8 10
