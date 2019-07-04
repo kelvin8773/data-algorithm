@@ -6,7 +6,7 @@ def advanced_quicksort(array, start=0, last=array.size-1)
   middle = start - 1
 
   for i in start..last
-   array[i] <= pivot ? (middle += 1; array[i], array[middle] = array[middle], array[i] ) : array[i]
+    (middle += 1; array[i], array[middle] = array[middle], array[i] ) if array[i] <= pivot 
   end
 
   advanced_quicksort(array, start, middle-1)
