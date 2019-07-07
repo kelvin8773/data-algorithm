@@ -11,8 +11,9 @@ def bfs(graph)
         queue << value
       end
     end
-    p queue
+    # p "queue - #{queue}"
     visited << key  
+    # p "visited - #{visited}"
   end
 
 return visited 

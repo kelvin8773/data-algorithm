@@ -1,7 +1,7 @@
 # Depth First Search Solution
 
 def depth_first_search(graph, key=0, res=[])
-    p "#{graph}, ------- #{key},-------- #{res}" # Not necessary but good for analysis
+    # p "#{graph}, ------- #{key},-------- #{res}" # Not necessary but good for analysis
     return if res.include? key
    
     res << key    
