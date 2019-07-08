@@ -8,6 +8,11 @@ def median(array)
   end
 end
 
+def median_r(array)
+  array.sort[array.size/2]  
+end
+
+
 def median_y(array, aim = array.size/2)
   pivot = array.last
   left, right = [], [pivot]
@@ -15,9 +20,7 @@ def median_y(array, aim = array.size/2)
   left.size  == aim ? pivot : left.size > aim ? median_y(left, aim) : median_y(right, aim-left.size)
 end
 
-def median_r(array)
-  array.sort[array.size/2]  
-end
+
 
 
 list1 = [0, 1, 2, 4, 6, 5, 2]

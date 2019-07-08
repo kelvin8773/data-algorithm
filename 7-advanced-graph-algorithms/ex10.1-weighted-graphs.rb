@@ -12,7 +12,7 @@ def depth_first_search(graph, key=0, visit=[0], dest)
     end
   end
   
-  return result
+  result
 end
 
 
