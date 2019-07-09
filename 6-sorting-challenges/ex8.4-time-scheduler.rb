@@ -1,6 +1,6 @@
 require 'benchmark/ips'
 
-def time_scheduler_kelvin(array)
+def time_scheduler(array)
   events = array.each_slice(2).to_a
 
   def overlaps?(events)
@@ -138,7 +138,7 @@ list = [3, 8, 1, 2, 3, 9, 1, 5, 4, 5, 8, 14]
 Benchmark.ips do |x|
   x.config(:time => 5, :warmup => 3)
   
-  x.report("Kelvin's method ") {time_scheduler_kelvin(list)}
+  x.report("Kelvin's method ") {time_scheduler(list)}
   x.report("Yunus's method ") {time_scheduler_yunus(list)}
   x.report("Yunus's 1 method ") {time_scheduler_yunus_1(list)}
   x.report("Ebuka's method ") {time_scheduler_ebuka(list)}
