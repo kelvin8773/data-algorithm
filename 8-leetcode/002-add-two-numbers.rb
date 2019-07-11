@@ -12,8 +12,7 @@ end
 # @return {ListNode}
 
 def add_two_numbers(l1, l2)
-   result, add = [], 0
-   x, y = l1.val, l2.val     
+   result, x, y, add = [], l1.val, l2.val, 0
    until l1.nil? && l2.nil? && add == 0   
        sum = x + y + add       
        result << sum % 10 
@@ -23,7 +22,7 @@ def add_two_numbers(l1, l2)
        x = l1.nil? ? 0 : l1.val
        y = l2.nil? ? 0 : l2.val       
    end      
-    result
+    array_to_linked_list(result)
 end
 
 def array_to_linked_list(array)
@@ -43,3 +42,4 @@ l1 = array_to_linked_list(list1)
 l2 = array_to_linked_list(list2)
 
 p add_two_numbers(l1, l2)
+
