@@ -1,3 +1,6 @@
+require 'benchmark/ips'
+
+
 # @param {Integer[]} nums
 # @return {Integer[][]}
 
@@ -101,3 +104,11 @@ p three_sum(arr).size
 
 
 
+Benchmark.ips do |x|
+  x.config(:time => 3, :warmup => 2)
+  
+  x.report("Yunus's Method") {three_sum_y(arr)}
+  x.report("Kelvin's Method") {three_sum(arr)}
+
+  x.compare!    
+end
