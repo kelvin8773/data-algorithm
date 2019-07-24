@@ -14,7 +14,7 @@ def simple_quicksort(array)
   return res
 end
 
-# p simple_quicksort([5, 8, 1, 3, 7, 10, 2])
+p simple_quicksort([5, 8, 1, 3, 7, 10, 2])
 # => 2 3
 #    1 2 3
 #    7 8 10
