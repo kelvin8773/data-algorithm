@@ -8,25 +8,31 @@ def median_k(array)
   end
 end
 
-def advanced_quicksort(array, start=0, last=array.size-1)
-  return array if last-start < 1
-  pivot = array[last]
-  middle = start - 1
+#################
 
-  for i in start..last
-   array[i] <= pivot ? (middle += 1; array[i], array[middle] = array[middle], array[i] ) : array[i]
+def advanced_quicksort(array)
+
+  def helper(array, start=0, last=array.size-1)
+    return array if last-start < 1
+    pivot = array[last]
+    middle = start - 1
+
+    for i in start..last
+    array[i] <= pivot ? (middle += 1; array[i], array[middle] = array[middle], array[i] ) : array[i]
+    end
+    helper(array, start, middle-1)
+    helper(array, middle+1, last)
   end
-
-  # puts array.join(" ")
-  advanced_quicksort(array, start, middle-1)
-  advanced_quicksort(array, middle+1, last)
+  result = array.dup
+  helper(result)   
 end
 
 def median_k1(array)
-  temp = array.clone
-  advanced_quicksort(temp)
+  temp = advanced_quicksort(array)
   temp[array.size/2]
 end
+
+##################
 
 def median_r(array)
   array.sort[array.size/2]  
@@ -68,7 +74,7 @@ def get_rand_number(numbers, range = 199999)
   list
 end
 
-list = get_rand_number(100000)
+list = get_rand_number(500)
 
 # all_list.each do |list|
   p "Benchmark test with #{list}"

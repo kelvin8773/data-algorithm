@@ -17,7 +17,6 @@ def insertion_sort(array)
     helper(array, index-1)  
   end
   
-  #start from 1 because insertion sort default assume array[0] is sorted.
   for index in 1..result.size-1    
     result = helper(result, index)  
  end 
@@ -57,7 +56,6 @@ def advanced_quicksort(array)
     for i in start..last
     array[i] <= pivot ? (middle += 1; array[i], array[middle] = array[middle], array[i] ) : array[i]
     end
-    # puts array.join(" ")
     helper(array, start, middle-1)
     helper(array, middle+1, last)
   end
@@ -77,6 +75,8 @@ array2 = [406, 157, 415, 318, 472, 46, 252, 187, 364, 481, 450, 90, 390, 35, 452
 
 all_list = [array, array1, array2]
 
+p array2.size 
+
 p ruby_sort(array1)
 
 p insertion_sort(array1)
@@ -94,7 +94,7 @@ Benchmark.ips do |x|
   x.report("Ruby Sort") {ruby_sort(list)}
   x.report("Insertion Sort") {insertion_sort(list)}
   x.report("Quick Sort") {quicksort(list)}
-  # x.report("Adv Quick Sort") {advanced_quicksort(list)}
+  x.report("Adv Quick Sort") {advanced_quicksort(list)}
   
   x.compare!    
 end
