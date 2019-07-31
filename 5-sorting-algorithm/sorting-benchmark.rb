@@ -85,9 +85,20 @@ p quicksort(array1)
 
 p advanced_quicksort(array1)
 
+def get_rand_number(numbers, range = 999999)
+  list = []
+  numbers.times do 
+    list << rand(range)
+  end
+  list
+end
 
-all_list.each do |list|
-p "Benchmark test with #{list}"
+list = get_rand_number(10000)
+
+
+# all_list.each do |list|
+# p "Benchmark test with #{list}"
+
 Benchmark.ips do |x|
   x.config(:time => 3, :warmup => 2)
   
@@ -99,4 +110,4 @@ Benchmark.ips do |x|
   x.compare!    
 end
 
-end
+# end
