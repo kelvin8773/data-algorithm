@@ -28,10 +28,12 @@ def longest_valid_parentheses_b(s)
   maxlen
 end
 
+# 
+
 
 # Left & right approach
 
-def longest_valid_parentheses(s)
+def longest_valid_parentheses_lr(s)
   left = right = maxlen = 0
   
   s.each_char do |x|   #left -> right
@@ -60,11 +62,33 @@ def longest_valid_parentheses(s)
   maxlen
 end
 
-p longest_valid_parentheses_b('(()')
+# Stack
+
+def longest_valid_parentheses(s)
+  stack = [-1]
+  max_len = 0
+  
+  s.each_char.with_index do |x, i|
+    if x == '('
+      stack << i 
+    else
+      stack.pop 
+      stack.empty? ? (stack << i) : (max_len = [max_len, i - stack.last].max)
+    end   
+  end
+  
+  max_len
+  
+end
+
+p longest_valid_parentheses('()')
 # => 2
 
-p longest_valid_parentheses_b(')()())')
+p longest_valid_parentheses('(((())(')
+# => 2
+
+p longest_valid_parentheses(')()())')
 # => 4
 
-p longest_valid_parentheses_b('(()())')
-# => 6
+p longest_valid_parentheses(')()()(')
+# => 4
