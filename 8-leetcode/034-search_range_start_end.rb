@@ -8,6 +8,7 @@ def search_range(nums, target)
   nums.each_with_index do |x, i|
       res[0] = i if x == target && res[0] == -1
       res[1] = i if x == target
+      break if res[1] != -1 && x != target
   end
   res
   

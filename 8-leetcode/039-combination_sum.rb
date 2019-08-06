@@ -2,24 +2,27 @@
 # @param {Integer} target
 # @return {Integer[][]}
 
-
 def combination_sum(candidates, target)
-  res = []
-  
-  candidates.each do |x|
-    next if x > target
-    remain = target % x
+  candidates.sort!
+  result = []
 
-    if remain == 0
-      res<< Array.new(target/x, x)
-    elsif candidates.include?(remain)
-      res << (Array.new(target/x, x) + [remain]).sort
+  def helper(arr, remain, result, res=[], i=0)
+    ( result << res.dup; return ) if remain == 0
+    return if remain < 0 
+
+    while (i < arr.size) && (remain-arr[i] >= 0)
+      res << arr[i]
+      helper(arr, remain-arr[i], result, res, i)
+      i += 1
+      res.pop
     end
+    result   
   end
-  res
+
+  helper(candidates, target, result)
 end
 
 
-p combination_sum([2,3,4,6,7], 9)
+p combination_sum([2,3,6,7], 7)
 
-p combination_sum([2,3,5], 8)
+# p combination_sum([2,3,5], 8)
