@@ -1,7 +1,7 @@
 # @param {Integer[]} nums
 # @return {Boolean}
 
-def can_jump(nums, start=0)
+def can_jump_r(nums, start=0)
   return true if nums.size - start == 1
   
   next_step = [start + nums[start], nums.size-1].min
@@ -14,6 +14,36 @@ def can_jump(nums, start=0)
 
   false
 end
+
+def can_jump_greedy(nums)
+  return true if nums.length < 2
+  current = nums.length - 1
+  distance = 0
+  while current > 0
+    current -= 1
+    distance += 1
+    if nums[current] >= distance
+      distance = 0
+    end
+  end
+  return distance == 0
+end
+
+def can_jump(nums)
+  len = nums.size
+  i = max = 0
+  
+  while i <= max do
+    max = [max, i+nums[i]].max
+    p max
+    return true if max >= len-1
+    i += 1
+  end 
+  false 
+end
+
+
+# p can_jump([2,3,1,1,4])
 
 # p can_jump([2,3,1,1,4])
 # => true
