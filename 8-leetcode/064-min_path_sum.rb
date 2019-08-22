@@ -1,6 +1,8 @@
 # @param {Integer[][]} grid
 # @return {Integer}
 
+# bruce force solution can't pass time limit
+
 def min_path_sum_b(grid)
   def helper(row, col, grid, sum=0, result=[])
     if [row, col] == [grid.size-1, grid[0].size-1]
