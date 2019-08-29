@@ -1,7 +1,7 @@
 # @param {Integer[]} heights
 # @return {Integer}
 
-def largest_rectangle_area(heights)
+def largest_rectangle_area_b(heights)
   max_area = 0
   for s in 1..heights.size do 
     for i in 0..heights.size-s do  
@@ -11,8 +11,58 @@ def largest_rectangle_area(heights)
   max_area   
 end
 
+def largest_rectangle_area_e(heights)
+  return 0 if heights.empty?
+  
+  stack = [-1, 0]
+  max_area = 0
+​
+  heights.each_with_index do |height, index|
+    next if index.zero?
+    
+    while height < heights[stack.last]
+      break if stack.last.negative?
+      area = heights[stack.pop] * (index - stack.last - 1)
+      max_area = area if area > max_area
+    end
+    
+    stack << index
+  end
+​
+  until stack.last.negative?
+    area = heights[stack.pop] * (heights.size - stack.last - 1)
+    max_area = area if area > max_area
+  end
+​
+  max_area
+end
 
-p largest_rectangle_area([2,1,5,6,4,2,3])
+def largest_rectangle_area(heights)
+  max_area = area = 0
+  stack = []
+  i = 0
+
+  while i < heights.size do 
+    if stack.empty? || heights[stack.last] <= heights[i]
+      stack << i
+      i += 1
+    else
+      top = stack.pop
+      area = stack.empty? ? heights[top]*i : heights[top]*(i - stack.last - 1)
+      max_area = area if max_area < area
+    end
+  end
+
+  while !stack.empty?
+    top = stack.pop
+    area = stack.empty? ? heights[top]*i : heights[top]*(i - stack.last - 1)
+    max_area = area if max_area < area
+  end
+  max_area
+end
+
+
+p largest_rectangle_area([2,1,5,6,2,3])
 # => 10
 
 p largest_rectangle_area([1])
@@ -28,4 +78,4 @@ super_array = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,
 
 p super_array.size
 
-# p largest_rectangle_area(super_array)
+p largest_rectangle_area(super_array)
