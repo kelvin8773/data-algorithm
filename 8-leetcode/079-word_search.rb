@@ -2,74 +2,38 @@
 # @param {String} word
 # @return {Boolean}
 
-def exist_w(board, word)
-    row = board.size
-    col =board.first.size
-    
-    for i in 0...row do
-      for j in 0...col do
-        pos = 0
-        if board[i][j] == word[pos]     
-          cur_row = i
-          cur_col = j
-          pos += 1
-          while (cur_row < row-1 && cur_row > 0) || (cur_col < col-1 && cur_col >0) || pos < word.size do
-              if board[cur_row-1] && word[pos] == board[cur_row-1][cur_col] 
-                cur_row -= 1
-                pos += 1
-              elsif board[cur_row] && word[pos] == board[cur_row][cur_col-1]
-                cur_col -= 1
-                pos += 1
-              elsif board[cur_row+1] && word[pos] == board[cur_row+1][cur_col]
-                cur_row += 1
-                pos += 1
-              elsif board[cur_row] && word[pos] == board[cur_row][cur_col+1]
-                cur_col += 1
-                pos += 1
-              else
-                break
-              end
-              p "#{pos} - #{cur_row} - #{cur_col}"
-          end
-
-          return true if pos == word.size
-
+def exist(board, word)
+    for i in 0...board.size do
+      for j in 0...board.first.size do
+        if board[i][j] == word[0]
+          return true if search(board, i, j, 0, word)
         end
       end
     end 
-
     false
 end
 
+def search(board, row, col, count, word)
+  return true if count == word.size
 
-def exist(board, word)
-  board.each_with_index do |row, i|
-    row.each_with_index do |cell, j|
-      return true if dfs(board, i, j, word)
-    end
-  end
-  false
-end
-
-def dfs(board, row, col, word)
-  return true if word.length == 0
-
-  if row < 0 || row >= board.length || col < 0 || col >= board[0].length || board[row][col] != word[0]
+  if row < 0 || col < 0 || row > board.size-1  || col > board.first.size-1 || board[row][col] != word[count]
     return false
   end
 
   temp = board[row][col]
-  board[row][col] = ''
+  board[row][col] = ""
 
-  result = dfs(board, row + 1, col, word[1..-1]) ||
-           dfs(board, row - 1, col, word[1..-1]) ||
-           dfs(board, row, col + 1, word[1..-1]) ||
-           dfs(board, row, col - 1, word[1..-1])
+  found = search(board, row+1, col, count+1, word) || 
+          search(board, row-1, col, count+1, word) || 
+          search(board, row, col+1, count+1, word) || 
+          search(board, row, col-1, count+1, word)
 
   board[row][col] = temp
-
-  return result
+  found
 end
+
+# LeetCode Exlpain
+# https://leetcode.com/problems/word-search/discuss/370618/Ruby-DFS-Solution-with-video-explain-Very-understandable
 
 
 board =
@@ -82,9 +46,21 @@ word1 = 'ABCCED'  #true
 word2 = 'SEE'     #true
 word3 = "ABCB"    #false
 
+board1 = 
+[ ["C","A","A"],
+  ["A","A","A"],
+  ["B","C","D"] ]
+word4 = "AAB"
 
-# p exist(board, word1)
+
+p exist(board, word1)
 # => true
-p exist(board, word2)
 
-# p exist(board, word3)
+p exist(board, word2)
+# => true
+
+p exist(board, word3)
+# => false
+
+p exist(board1, word4)
+# => true
