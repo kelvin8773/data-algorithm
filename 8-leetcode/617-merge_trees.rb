@@ -27,11 +27,11 @@ end
 def make_tree_node(arr)
   node = TreeNode.new(arr[0])
   pointer = node
-  i = 1
+  i = 0
 
-  while i < arr.size
-    pointer.left = TreeNode.new(arr[i])
-    pointer.right = TreeNode.new(arr[i+1]) 
+  while i < arr.size-1
+    pointer.left = TreeNode.new(arr[2*i+1])
+    pointer.right = TreeNode.new(arr[2*i+2]) 
 
     i % 2 != 0 ? (pointer = pointer.left) : (pointer = pointer.right)
     i += 2
@@ -49,7 +49,6 @@ t2 = make_tree_node(arr2)
 
 # p t1
 p t2
-
 
 p merge_trees(t1, t2)
 
