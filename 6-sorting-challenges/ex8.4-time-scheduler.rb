@@ -2,22 +2,16 @@ require 'benchmark/ips'
 
 def time_scheduler(array)
   events = array.each_slice(2).to_a
+  events.sort_by! {|x| x.last }
 
-  def overlaps?(events)
-    for index in 0..events.size-2
-      return true if events[index].last >= events[index+1].first
+  schedule = [events[0]]
+  
+  events.each do |event|
+    if event.first > schedule.last.last
+      schedule << event
     end
-    false
   end
-
-  size = events.size
-
-  until size == 1
-    temp = events.combination(size).to_a.find {|x| !overlaps?(x.sort)}
-    return temp.sort if !temp.nil?
-    size -= 1    
-  end
-
+  schedule
 end
 
 ########################
@@ -28,7 +22,10 @@ def time_scheduler_yunus(array)
    array_ar << [array[i], array[i+1]]
    i += 2
   end
-  advanced_quicksort(array_ar);  unoverlap(array_ar)
+  
+  advanced_quicksort(array_ar)
+  # p array_ar.sort_by! { |x| x[1]}
+  unoverlap(array_ar)
 end 
 
 def advanced_quicksort(array, ind1=0, ind2=array.size-1)
@@ -127,7 +124,7 @@ end
 
 ##############
 
-# p time_scheduler([4, 8, 1, 3, 7, 9, 5, 6])
+p time_scheduler([4, 8, 1, 3, 7, 9, 5, 6])
 # # => [[1,3], [5,6], [7,9]]
 
 # p time_scheduler([3, 8, 1, 2, 3, 9, 1, 5, 4, 5, 8, 14])
