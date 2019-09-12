@@ -8,8 +8,7 @@ end
 
 def find_disappeared_numbers(nums)
   nums.sort!
-  n = nums.size
-  result, idx, number = [], 0, 1
+  result, n, idx, number = [], nums.size, 0, 1
 
   while idx < n do
     if nums[idx] == number 
@@ -18,9 +17,6 @@ def find_disappeared_numbers(nums)
     elsif nums[idx] > number 
       result << number
       number += 1
-    # elsif idx == n-1 && number <= n
-    #   result << number
-    #   idx += 1
     else
       idx += 1
     end
