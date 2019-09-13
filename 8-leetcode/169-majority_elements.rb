@@ -20,13 +20,16 @@ def majority_element(nums)
 
   nums.each do |x|
     candidate = x if count.zero?
+    p "#{candidate} - #{count}"
     count += (x == candidate ? 1 : -1)
   end
   candidate
 end
 
-p majority_element([3, 2, 3])
+# p majority_element([3, 2, 3])
 # => 3
 
-p majority_element([2, 2, 1, 1, 1, 2, 2])
+# p majority_element([2, 2, 1, 1, 1, 2, 2])
 # => 2
+
+p majority_element([7, 7, 7, 7, 2, 5, 5])
