@@ -1,17 +1,19 @@
 # @param {Integer[]} nums
 # @return {Integer}
 
-def rob(nums)
-  def helper(nums, house, rob=0)
-    p "#{house} + #{rob}"
-    return nums.max if nums.size <= 2
-    return rob if house >= nums.size
-
-    [ helper(nums, house+2, rob+nums[house]), 
-      helper(nums, house+3, rob+nums[house]) ].max
+def rob(nums)  
+  first = second = 0
+   
+  nums.each_with_index do |x, i|
+    if i.even? 
+      first = [first+x, second].max
+    else
+      second = [second+x, first].max
+    end
   end
-
-  [helper(nums, 0), helper(nums, 1)].max
+  
+  [first, second].max
+  
 end
 
 p rob([2, 4])
