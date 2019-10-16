@@ -12,11 +12,7 @@
 
 def inorder_traversal(root, res=[])
   return res if root.nil?
-  
   inorder_traversal(root.left, res)
-  
   res << root.val
-  
   inorder_traversal(root.right, res)
-  
 end
