@@ -2,16 +2,15 @@
 # @return {Integer[]}
 
 def product_except_self(nums)
-  res = Array.new(nums.size, 0)
-  product = nums.inject(:*)
-  for i in 0...nums.size
-    if nums[i].abs == 1
-      res[i] = nums[i] == 1 ? product : -product
-    else
-      temp = nums[0...i] + nums[i+1..-1]
-      res[i] = temp.inject(:*)
-      return res if nums[i] == 0
-    end 
+  res = Array.new(nums.size, 1)
+  for i in 1...nums.size 
+    res[i] = res[i-1] * nums[i-1]
+  end
+  
+  right_mx = 1
+  (nums.size-1).downto 0 do |i|
+    res[i] = res[i] * right_mx
+    right_mx *= nums[i]
   end
   res
 end
