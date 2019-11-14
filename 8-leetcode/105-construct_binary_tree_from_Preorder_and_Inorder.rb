@@ -11,9 +11,10 @@
 # @param {Integer[]} inorder
 # @return {TreeNode}
 
-def build_tree(preorder, inorder, tree=TreeNode.new(preorder.first))
+def build_tree(preorder, inorder)
+    tree=TreeNode.new(preorder.first)
     return if preorder.size == 0
-    
+
     if preorder.size == 1
       tree.val = preorder.first
       return tree
