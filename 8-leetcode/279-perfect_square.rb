@@ -1,7 +1,7 @@
 # @param {Integer} n
 # @return {Integer}
 
-def num_squares(n)
+def num_squares_b(n)
   base = 1
   square_arr = []
   min_count = 9999999
@@ -36,6 +36,19 @@ def num_squares(n)
   min_count
 end
 
+def num_squares(n)
+  res = Array.new(n+1, Float::INFINITY)
+  res[0] = 0
+  
+  for i in 1..n
+    for j in 1..(Math.sqrt(n).floor())
+      res[i] = [res[i-j*j]+1, res[i]].min
+    end
+  end
+  
+  res[n]
+end
+
 
 # p num_squares(12)
 # 3
@@ -45,3 +58,6 @@ end
 
 p num_squares(43)
 # 3
+
+p num_squares(4586)
+# 2
