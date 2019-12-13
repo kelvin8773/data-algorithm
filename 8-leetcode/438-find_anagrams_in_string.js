@@ -6,46 +6,49 @@
 
 var findAnagrams = function (s, p) {
   let result = [];
-  if (s.length < p.length) return result;
 
-  const allSameChart = (string) => {
-    for (let i = 0; i < string.length; i++) {
-      if (string[i] !== string[0]) {
+  if (s.length < p.length) return result;
+  let check = {};
+  let sameP = false;
+
+  for (let char of p) {
+    check[char] ? (check[char] += 1) : (check[char] = 1);
+  };
+
+  if (Object.keys(check).length === 1) sameP = true;
+
+  const checkAnagrams = (p, string) => {
+    if (sameP && p !== string) return false;
+    if (p === string) return true;
+    if (!p.includes(string[0])) return false;
+
+    let checkClone = { ...check };
+
+    for (let char of string) {
+      if (checkClone[char]) {
+        checkClone[char] -= 1;
+      } else {
         return false;
       }
     }
     return true;
   };
 
-  const checkAnagrams = (p, string) => {
-    if (!p.includes(string[0])) return false;
-    if (p === string) return true;
 
-    let check = {};
-    for (let char of p) {
-      check[char] ? (check[char] += 1) : (check[char] = 1);
-    }
+  let lastCheck = checkAnagrams(p, s.slice(0, p.length));
+  if (lastCheck) result.push(0);
 
-    for (let char of string) {
-      if (check[char]) {
-        check[char] -= 1;
+  for (let i = 1; i < s.length - p.length + 1; i++) {
+    if (s[i - 1] === s[i + p.length - 1]) {
+      if (lastCheck) result.push(i);
+    } else {
+      if (lastCheck) {
+        lastCheck = false;
       } else {
-        return false;
-      }
+        lastCheck = checkAnagrams(p, s.slice(i, i + p.length));
+      };
+      if (lastCheck) result.push(i);
     }
-    return true;
-  }
-
-  let sameP = allSameChart(p);
-  let lenP = p.length;
-
-  for (let i = 0; i < s.length - p.length + 1; i++) {
-    if (sameP) {
-      if (s.slice(i, i + lenP) === p) {
-        result.push(i);
-        continue;
-      }
-    } else if (checkAnagrams(p, s.slice(i, i + lenP))) result.push(i);
   }
 
   return result;
